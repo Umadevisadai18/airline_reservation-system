@@ -1,0 +1,35 @@
+{% extends 'reservations/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>My Bookings</h2>
+
+{% if bookings %}
+<table>
+    <tr>
+        <th>Passenger</th>
+        <th>Flight</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Action</th>
+    </tr>
+    {% for booking in bookings %}
+    <tr>
+        <td>{{ booking.passenger.name }}</td>
+        <td>{{ booking.flight.flight_number }}</td>
+        <td>{{ booking.flight.departure }}</td>
+        <td>{{ booking.flight.destination }}</td>
+        <td>{{ booking.flight.departure_time }}</td>
+        <td>{{ booking.flight.arrival_time }}</td>
+        <td>
+            <a href="{% url 'cancel_booking' booking.id %}">Cancel</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No bookings yet. <a href="{% url 'book_flight' %}">Book a flight</a>.</p>
+{% endif %}
+{% endblock %}
