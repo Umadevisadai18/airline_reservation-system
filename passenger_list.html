@@ -1,0 +1,45 @@
+{% extends 'reservations/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Passenger List</h2>
+
+{% if messages %}
+  <ul>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if passengers %}
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Contact</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for passenger in passengers %}
+        <tr>
+            <td>{{ passenger.name }}</td>
+            <td>{{ passenger.age }}</td>
+            <td>{{ passenger.contact }}</td>
+            <td>
+                <a href="{% url 'cancel_passenger' passenger.id %}"
+                   onclick="return confirm('Are you sure you want to remove this passenger?');">
+                   Cancel
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No passengers found. <a href="{% url 'add_passenger' %}">Add a passenger</a></p>
+{% endif %}
+
+{% endblock %}
