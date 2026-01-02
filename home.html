@@ -1,0 +1,25 @@
+{% extends 'reservations/base.html' %}
+
+{% block content %}
+<h2>Available Flights</h2>
+<table>
+    <tr>
+        <th>Flight Number</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Seats</th>
+    </tr>
+    {% for flight in flights %}
+    <tr>
+        <td>{{ flight.flight_number }}</td>
+        <td>{{ flight.departure }}</td>
+        <td>{{ flight.destination }}</td>
+        <td>{{ flight.departure_time }}</td>
+        <td>{{ flight.arrival_time }}</td>
+        <td>{{ flight.seats_available }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
