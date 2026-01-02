@@ -1,0 +1,40 @@
+{% extends 'reservations/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>My Bookings</h2>
+
+{% if bookings %}
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Passenger Name</th>
+            <th>Age</th>
+            <th>Contact</th>
+            <th>Flight Number</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.passenger.name }}</td>
+            <td>{{ booking.passenger.age }}</td>
+            <td>{{ booking.passenger.contact }}</td>
+            <td>{{ booking.flight.flight_number }}</td>
+            <td>{{ booking.flight.departure }}</td>
+            <td>{{ booking.flight.destination }}</td>
+            <td>{{ booking.flight.departure_time }}</td>
+            <td>{{ booking.flight.arrival_time }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>You have no bookings yet. <a href="{% url 'book_flight' %}">Book a flight</a></p>
+{% endif %}
+
+{% endblock %}
